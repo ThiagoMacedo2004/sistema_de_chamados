@@ -1,0 +1,75 @@
+mat-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title-micros {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #555;
+  width: 100%;
+}
+
+
+mat-form-field.filter-lojas {
+  width: 20%;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 14px;
+}
+
+mat-form-field.filter-micros {
+  font-size: 14px;
+  width: 50%;
+}
+
+.tabela {
+  max-height: 475px;
+  overflow-y: auto;
+}
+
+table {
+  width: 100%;
+}
+
+tr[mat-header-row] {
+  background-color: #3f51b5;
+  /* color: whitesmoke ; */
+}
+
+tr[mat-header-row] > th {
+  color: whitesmoke;
+
+}
+
+table tr > td:last-child {
+  text-align: center;
+}
+
+.micro-furtado td {
+  color: rgb(252, 32, 32);
+  font-weight: 500;
+}
+
+.micro-furtado {
+  background-color: rgb(255, 241, 241);
+}
+
+[mat-row] {
+  transition: 20ms;
+}
+
+[mat-row]:hover {
+  background-color: whitesmoke;
+  cursor: pointer;
+  translate: 0 -1px;
+}
+
+.asset-tag-input input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+

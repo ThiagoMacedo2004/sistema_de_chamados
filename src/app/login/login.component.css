@@ -1,0 +1,51 @@
+mat-card {
+  position: absolute;
+  width: 28%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) ;
+  padding: 30px;
+}
+
+mat-card-header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items:center ;
+  text-align: center;
+}
+
+mat-card-header mat-card-title {
+  font-size: 28px;
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.btn-visualzar-senha {
+  cursor: pointer;
+
+}
+
+mat-label {
+  font-size: large;
+}
+
+[matInput] {
+  font-size:large;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.actions a {
+  width: 50%;
+}

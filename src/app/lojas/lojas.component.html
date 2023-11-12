@@ -1,0 +1,56 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title class="title-lojas">
+      <mat-icon class="icons">storefront</mat-icon>
+      Lojas
+    </mat-card-title>
+    <mat-card-subtitle>Lista de Lojas</mat-card-subtitle>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Filtro</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. loja 001" [(ngModel)]="input">
+    </mat-form-field>
+
+  </mat-card-header>
+
+  <mat-card-content>
+
+
+    <div class="tabela">
+      <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+        <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
+          <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+          <td mat-cell *matCellDef="let loja"> {{loja[column]}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="ACAO">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let loja" (click)="$event.stopPropagation()">
+            <button mat-icon-button color="primary" (click)="dialogDetalheLoja(loja)">
+                <mat-icon >search</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+
+        <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand; sticky: true"></tr>
+        <tr mat-row
+            *matRowDef="let loja;columns: columnsToDisplayWithExpand;"
+            class="example-loja-row"
+            (click)="dialogDetalheLoja(loja)">
+          </tr>
+
+
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">Nenhuma LOJA encontrada com a informação: "{{input}}"</td>
+        </tr>
+      </table>
+    </div>
+
+  </mat-card-content>
+</mat-card>
+
+
+

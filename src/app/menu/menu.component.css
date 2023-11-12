@@ -1,0 +1,52 @@
+.example-tree-invisible {
+  display: none;
+}
+
+.example-tree ul,
+.example-tree li {
+  margin-top: 0;
+  margin-bottom: 0;
+  list-style-type: none;
+}
+
+/*
+ * This padding sets alignment of the nested nodes.
+ */
+
+
+/*
+ * Padding for leaf nodes.
+ * Leaf nodes need to have padding so as to align with other non-leaf nodes
+ * under the same parent.
+ */
+.example-tree div[role=group] > .mat-tree-node {
+  /* padding-left: 0; */
+}
+
+.itens-tree {
+  text-decoration: none;
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  line-height: 40px
+  /* padding: 0; */
+}
+
+mat-tree-node.menu {
+  cursor: pointer;
+  /* border-top: 1px solid #878787; */
+  border-top: 1px solid #ebebeb;
+  font-weight: 500;
+}
+
+mat-tree-node a > span {
+  text-align: start;
+}
+
+mat-tree-node.atividades:hover {
+  background-color: aquamarine;
+}
+
+span.name{
+  width: 100%;
+}

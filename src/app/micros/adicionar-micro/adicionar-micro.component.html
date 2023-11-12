@@ -1,0 +1,77 @@
+<h1 mat-dialog-title>
+
+  <div>
+    <mat-icon>add_to_queue</mat-icon>
+    <span>Adicionar Micro</span>
+  </div>
+
+  <button mat-icon-button (click)="_dialogRef.close()">
+      <mat-icon >close</mat-icon>
+  </button>
+
+</h1>
+
+<mat-dialog-content class="mat-typography">
+
+  <form [formGroup]="formGroup">
+    <mat-form-field appearance="outline">
+      <mat-label>SERVICE_TAG</mat-label>
+      <input matInput formControlName="SERVICE_TAG" [errorStateMatcher]="matcher">
+
+      <mat-error class="msg-error" *ngIf="formGroup.get('SERVICE_TAG')?.hasError('required')">
+        SERVICE_TAG é <strong>Obrigatório</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>ASSET_TAG</mat-label>
+      <input matInput formControlName="ASSET_TAG"
+        type="text" [textMask]="{mask: mask}"
+        [(ngModel)]="myModel"
+        (keyup)="mascara()"
+        [errorStateMatcher]="matcher"
+      >
+
+      <mat-error class="msg-error" *ngIf="formGroup.get('ASSET_TAG')?.hasError('required')">
+        ASSET_TAG é <strong>Obrigatório</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>FABRICANTE</mat-label>
+      <input type="text" matInput formControlName="FABRICANTE" [errorStateMatcher]="matcher">
+
+      <mat-error class="msg-error" *ngIf="formGroup.get('FABRICANTE')?.hasError('required')">
+        FABRICANTE é <strong>Obrigatório</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>MODELO</mat-label>
+      <input type="text" matInput formControlName="MODELO" [errorStateMatcher]="matcher">
+
+      <mat-error class="msg-error" *ngIf="formGroup.get('MODELO')?.hasError('required')">
+        MODELO é <strong>Obrigatório</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>LOJA</mat-label>
+      <input type="text" matInput aria-label="State" [matAutocomplete]="auto" formControlName="lojasControl">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option *ngFor="let row of filteredLojas" [value]="row.LOJA">
+          <span>{{row.LOJA}}</span>
+        </mat-option>
+      </mat-autocomplete>
+      <mat-error class="msg-error" *ngIf="formGroup.get('lojasControl')?.hasError('required')">
+        LOJA é <strong>Obrigatório</strong>
+      </mat-error>
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button color="primary" [disabled]="!formGroup.valid" (click)="adicionarMicro()">
+    Salvar
+  </button>
+</mat-dialog-actions>

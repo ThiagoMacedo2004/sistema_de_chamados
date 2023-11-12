@@ -1,0 +1,57 @@
+h1 {
+  display: flex;
+  align-items: center;
+  gap: 10px ;
+  color: #555;
+}
+
+
+.row {
+  /* width: 100%; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+h3 {
+  font-weight: lighter;
+}
+
+mat-form-field.local {
+  width: 13%;
+}
+
+mat-form-field.endereco {
+  width: 35%;
+}
+
+mat-form-field.bairro {
+  width: 25%;
+}
+
+mat-form-field.cep {
+  width: 12%;
+}
+
+mat-form-field.horario {
+  width: 15%;
+}
+
+mat-form-field.link-dados {
+  width: 50%;
+}
+
+mat-form-field.banda-larga {
+  width: 25%;
+}
+
+mat-form-field.status {
+  width: 25%;
+}
+
+div > button {
+  font-weight: 400;
+}
+
+

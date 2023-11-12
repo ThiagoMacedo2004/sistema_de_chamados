@@ -1,0 +1,89 @@
+<h1 mat-dialog-title>
+  <mat-icon>storefront</mat-icon>
+  <span>Editar - {{data.LOJA}}</span>
+</h1>
+
+<div mat-dialog-content>
+  <form [formGroup]="formGroup">
+    <h3>Endereço</h3>
+    <div class="row">
+
+
+      <mat-form-field class="local" appearance="outline">
+        <mat-label>Local</mat-label>
+        <mat-select formControlName="local" [(ngModel)]="data.LOCAL"  [errorStateMatcher]="matcher" >
+          <mat-option *ngFor="let local of locais" [value]="local">
+            {{local}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="errosForm.local.hasError('required')">
+          LOCAL é <strong>Obrigatório</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="endereco" appearance="outline">
+        <mat-label>Endereço</mat-label>
+        <input matInput formControlName="endereco" [(ngModel)]="data.ENDERECO" [errorStateMatcher]="matcher">
+
+        <mat-error *ngIf="errosForm.endereco.hasError('required')">
+          O ENDEREÇO é <strong>Obrigatório</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="bairro" appearance="outline">
+        <mat-label>Bairro</mat-label>
+        <input matInput formControlName="bairro" [(ngModel)]="data.BAIRRO" [errorStateMatcher]="matcher">
+
+        <mat-error *ngIf="errosForm.bairro.hasError('required')">
+          O BAIRRO é <strong>Obrigatório</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="cep" appearance="outline">
+        <mat-label>CEP</mat-label>
+        <input matInput formControlName="cep"
+              [(ngModel)]="data.CEP"
+              [errorStateMatcher]="matcher"
+              type="text"
+              [textMask]="{mask: mask}"
+              (keyup)="mascara()">
+
+        <mat-error *ngIf="errosForm.cep.hasError('required')">
+          O CEP é <strong>Obrigatório</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="horario" appearance="outline">
+        <mat-label>Horario</mat-label>
+        <mat-select formControlName="horario" [(ngModel)]="data.HORARIO_FUNC"  [errorStateMatcher]="matcher" >
+          <mat-option *ngFor="let horario of horarios" [value]="horario">
+            {{horario}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="errosForm.horario.hasError('required')">
+          HORARIO é <strong>Obrigatório</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="status" appearance="outline">
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="status" [(ngModel)]="data.STATUS"  [errorStateMatcher]="matcher" >
+          <mat-option *ngFor="let stats of status" [value]="stats">
+            {{stats}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="errosForm.status.hasError('required')">
+          STATUS é <strong>Obrigatório</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <mat-divider></mat-divider>
+
+  </form>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-stroked-button color="warn" (click)="_dialog.close()" >SAIR</button>
+  <button mat-flat-button	[disabled]="!formGroup.valid" color="primary" (click)="editarLoja()">SALVAR</button>
+</div>
+

@@ -1,0 +1,20 @@
+h1 {
+  display: flex;
+  align-items: center;
+  gap: 10px ;
+  color: #555;
+}
+
+table {
+  width: 100%;
+}
+
+div.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+mat-form-field.formulario{
+  width: 30%;
+}

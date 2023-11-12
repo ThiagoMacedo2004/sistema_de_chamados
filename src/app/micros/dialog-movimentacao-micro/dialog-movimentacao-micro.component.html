@@ -1,0 +1,116 @@
+<h1 mat-dialog-title>
+  <mat-icon>devices_other</mat-icon>
+  <span>Movimentação de Micro</span>
+</h1>
+
+<div mat-dialog-content>
+  <h3>Status Atual do Micro</h3>
+  <div class="table">
+    <table mat-table [dataSource]="dataSource">
+
+      <ng-container matColumnDef="LOCAL">
+        <th mat-header-cell *matHeaderCellDef> LOCAL</th>
+        <td mat-cell *matCellDef="let micro"> {{micro.LOJA}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="SERVICE_TAG">
+        <th mat-header-cell *matHeaderCellDef> SERVICE_TAG </th>
+        <td mat-cell *matCellDef="let micro"> {{micro.SERVICE_TAG}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="ASSET_TAG">
+        <th mat-header-cell *matHeaderCellDef> ASSET_TAG </th>
+        <td mat-cell *matCellDef="let micro"> {{micro.ASSET_TAG}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="FABRICANTE">
+        <th mat-header-cell *matHeaderCellDef> FABRICANTE </th>
+        <td mat-cell *matCellDef="let micro"> {{micro.FABRICANTE}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="MODELO">
+        <th mat-header-cell *matHeaderCellDef> MODELO </th>
+        <td mat-cell *matCellDef="let micro"> {{micro.MODELO}} </td>
+      </ng-container>
+
+      <!-- <ng-container matColumnDef="ANALISTA">
+        <th mat-header-cell *matHeaderCellDef> ANALISTA </th>
+        <td mat-cell *matCellDef="let micro"> {{micro.MATRICULA}} - {{micro.NOME}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="DATA">
+        <th mat-header-cell *matHeaderCellDef> DATA </th>
+        <td mat-cell *matCellDef="let micro"> {{micro.DATA | date : 'dd/MM/yyyy'}}</td>
+      </ng-container> -->
+
+      <ng-container matColumnDef="STATUS">
+        <th mat-header-cell *matHeaderCellDef> STATUS </th>
+        <td mat-cell *matCellDef="let micro"> {{micro.STATUS}}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+  <h3>Alterar Situação do Micro</h3>
+  <form [formGroup]="formGroup">
+
+    <div class="row">
+      <mat-form-field class="loja formulario" appearance="outline">
+        <mat-label>Loja</mat-label>
+        <input type="text" matInput aria-label="State" [matAutocomplete]="auto" formControlName="lojasControl" [(ngModel)]="lojaAtual">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option *ngFor="let row of filteredLojas" [value]="row.LOJA">
+            <span>{{row.LOJA}}</span>
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="errosForm.loja.hasError('required')">
+          LOJA é <strong>Obrigatório</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="status formulario" appearance="outline">
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="status"  [errorStateMatcher]="matcher"[(ngModel)]="data.STATUS" >
+          <mat-option value="">--Selecione--</mat-option>
+          <mat-option *ngFor="let item of status" [value]="item">
+            {{item}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="errosForm.status.hasError('required')">
+          STATUS é <strong>Obrigatório</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="data formulario" appearance="outline">
+        <mat-label>Data do Evento</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="data" [disabled]="true">
+        <!-- <mat-hint>DD/MM/AAAA</mat-hint> -->
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker disabled="false"></mat-datepicker>
+        <mat-error *ngIf="errosForm.data.hasError('required')">
+          DATA é <strong>Obrigatória</strong>
+        </mat-error>
+      </mat-form-field>
+
+    </div>
+
+    <div class="row">
+      <mat-form-field>
+        <mat-label>Observação</mat-label>
+        <textarea matInput rows="4" formControlName="observacao"></textarea>
+        <mat-error *ngIf="errosForm.observacao.hasError('required')">
+          Observação é <strong>Obrigatório</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+  </form>
+
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-stroked-button color="warn" [mat-dialog-close] >SAIR</button>
+  <button mat-raised-button [disabled]="!formGroup.valid"  color="primary" (click)="movimentacaoMicro()">SALVAR</button>
+</div>
+

@@ -1,0 +1,51 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* html, body { height: 100%; } */
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #fafafa;
+}
+
+.mat-form-field-suffix .mat-icon {
+  font-size:24px;
+}
+
+mat-icon.icons {
+  width: auto;
+  height: auto;
+  font-size: xx-large ;
+}
+
+/* mat-form-field div.mat-form-field-infix {
+  display: flex;
+  justify-content: end;
+  padding: 0;
+} */
+
+.mat-list-base .mat-list-item .mat-list-item-content, .mat-list-base .mat-list-option .mat-list-item-content {
+  padding: 0px;
+}
+
+div.mat-form-field-infix {
+  display: flex;
+}
+
+tr[mat-header-row] {
+  background-color: #3f51b5;
+
+  /* color: whitesmoke ; */
+}
+
+table tr.mat-header-row {
+  height: 40px;
+}
+
+tr[mat-header-row] > th {
+  color: whitesmoke;
+  font-weight: 500;
+}
+
+
+
+

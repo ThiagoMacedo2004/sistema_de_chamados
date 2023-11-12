@@ -1,0 +1,19 @@
+<mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+  <!-- This is the tree node template for leaf nodes -->
+  <mat-tree-node class="atividades" *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
+    <!-- use a disabled button to provide padding for tree leaf -->
+    <!-- <button mat-icon-button disabled></button> -->
+    <a routerLink="{{node.router}}" class="itens-tree">
+      <span class="name">{{node.name}}</span>
+    </a>
+  </mat-tree-node>
+  <!-- This is the tree node template for expandable nodes -->
+  <mat-tree-node class="menu" *matTreeNodeDef="let node;when: hasChild" (click)="recolherMenu(node)" matTreeNodeToggle matTreeNodePadding >
+    <button mat-icon-button matTreeNodeToggle (click)="recolherMenu(node)">
+      <mat-icon class="mat-icon-rtl-mirror">
+        {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+      </mat-icon>
+    </button>
+    {{node.name}}
+  </mat-tree-node>
+</mat-tree>

@@ -1,0 +1,14 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>My App</span>
+  <span class="example-spacer"></span>
+  <span class="nome-usuario">{{usuario.nome}}</span>
+  <button mat-icon-button class="btn-logout" (click)="sair()">
+    <mat-icon>
+      <span class="material-symbols-outlined">logout</span>
+    </mat-icon>
+  </button>
+
+</mat-toolbar>

@@ -1,0 +1,113 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title class="title-micros">
+      <mat-icon class="icons">devices</mat-icon>
+      Micros
+      <!-- <button mat-raised-button (click)="atualizarInfoMicros()" [disabled]="!inputLoja">Micros Selecionados</button> -->
+    </mat-card-title>
+
+    <mat-card-subtitle *ngIf="dataSource.data.length > 0" >
+      Listagem de Micros - Total: {{totalMicros}} <br>
+      Micros Selecionados: {{selection.selected.length}}
+    </mat-card-subtitle>
+
+    <button mat-raised-button color="primary" (click)="adicionarMicro()" *ngIf="!loadMicros" >
+      Novo Micro
+    </button>
+
+    <!-- <mat-form-field class="loja formulario" appearance="outline">
+      <mat-label>Loja</mat-label>
+      <input
+          type="text"
+          matInput aria-label="State"
+          [matAutocomplete]="auto"
+          [formControl]="lojasControl"
+          [(ngModel)]="inputLoja"
+          (click)="inputLoja = ''">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option *ngFor="let row of filteredLojas" [value]="row.LOJA">
+          <span>{{row.LOJA}}</span>
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field> -->
+
+    <mat-form-field class="filter-micros" appearance="fill" *ngIf="dataSource.data.length > 0" >
+      <mat-label>Filtro</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. loja 001" [(ngModel)]="input">
+      <button *ngIf="input" matSuffix mat-icon-button aria-label="Clear"
+        (click)="[input='',dataSource.filter = input, totalMicros = dataSource.data.length, selection.clear() ]">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </mat-card-header>
+
+  <mat-card-content>
+
+    <div class="tabela" *ngIf="dataSource.data.length > 0">
+      <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+        <ng-container matColumnDef="select">
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-checkbox (change)="$event ? toggleAllRows() : null"
+                          [checked]="selection.hasValue() && isAllSelected()"
+                          [indeterminate]="selection.hasValue() && !isAllSelected()">
+            </mat-checkbox>
+          </th>
+          <td mat-cell *matCellDef="let row">
+            <mat-checkbox
+              (click)="[$event.stopPropagation()]"
+              (change)="$event ? selection.toggle(row) : null"
+              [checked]="selection.isSelected(row)">
+            </mat-checkbox>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
+          <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+          <td mat-cell *matCellDef="let micro"> {{micro[column]}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="ACAO">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let row" (click)="$event.stopPropagation()">
+            <button mat-icon-button [matMenuTriggerFor]="menu" (click)="selectionClear()">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="historicoMicro(row)">
+                <mat-icon>manage_search</mat-icon>
+                <span>Histórico Micro</span>
+              </button>
+              <button mat-menu-item (click)="movimentacaoMicro(row)">
+                <mat-icon>edit</mat-icon>
+                <span>Alterar Informações</span>
+              </button>
+              <button mat-menu-item (click)="deletarMicro(row)" >
+                <mat-icon color="warn">delete</mat-icon>
+                <span>Deletar Micro</span>
+              </button>
+            </mat-menu>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithSelect; sticky: true"></tr>
+        <tr mat-row
+            *matRowDef="let row; columns: columnsToDisplayWithSelect;"
+            [ngClass]="{
+              'micro-furtado': row.STATUS == 'FURTO'}"
+
+            (click)="[selection.toggle(row), ]"></tr>
+
+
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" [attr.colspan]="columnsToDisplayWithSelect.length">Nenhuma informação encontrada referente a: "{{input}}"</td>
+        </tr>
+      </table>
+    </div>
+
+    <span *ngIf="dataSource.data.length == 0">Nenhum Micro Cadastrado !!!</span>
+
+  </mat-card-content>
+  <mat-card-footer *ngIf="loadMicros">
+    <mat-progress-bar mode="query"></mat-progress-bar>
+  </mat-card-footer>
+</mat-card>

@@ -1,0 +1,62 @@
+<h1 mat-dialog-title>
+  <mat-icon>manage_accounts</mat-icon>
+  <span>Editar Usuário</span>
+</h1>
+<div mat-dialog-content>
+  <form [formGroup]="formGroup">
+    <div class="row">
+      <mat-form-field class="nome" appearance="fill">
+        <mat-label>Nome</mat-label>
+        <input matInput formControlName="nome" [(ngModel)]="data.nome" [errorStateMatcher]="matcher">
+
+        <mat-error *ngIf="errosForm.nome.hasError('required')">
+          O Nome é <strong>Obrigatório</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="matricula" appearance="fill">
+        <mat-label>Matricula</mat-label>
+        <input matInput formControlName="matricula" [(ngModel)]="data.matricula" [errorStateMatcher]="matcher">
+
+        <mat-error *ngIf="errosForm.matricula.hasError('required')">
+          A Matricula é <strong>Obrigatória</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field class="email" appearance="fill">
+        <mat-label>E-mail</mat-label>
+        <input matInput formControlName="email" [(ngModel)]="data.email"  [errorStateMatcher]="matcher">
+
+        <mat-error *ngIf="errosForm.email.hasError('email') && !errosForm.email.hasError('required')">
+          Informe um e-mail Válido
+        </mat-error>
+        <mat-error *ngIf="errosForm.email.hasError('required')">
+          E-mail é <strong>Obrigatório</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="senha" appearance="fill">
+        <mat-label>Senha</mat-label>
+        <input matInput formControlName="senha" [(ngModel)]="data.senha" [errorStateMatcher]="matcher">
+
+        <mat-error *ngIf="errosForm.senha.hasError('required')">
+          A Senha é <strong>Obrigatório</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="senha" appearance="fill">
+        <mat-label>Repetir Senha</mat-label>
+        <input matInput formControlName="repeteSenha" [(ngModel)]="data.senha" [errorStateMatcher]="matcher">
+
+        <mat-error *ngIf="errosForm.senha.hasError('required')">
+          A Repetir a senha é <strong>Obrigatório</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button >SAIR</button>
+  <button mat-button [disabled]="!formGroup.valid" (click)="editarUsuario()" cdkFocusInitial>SALVAR</button>
+</div>

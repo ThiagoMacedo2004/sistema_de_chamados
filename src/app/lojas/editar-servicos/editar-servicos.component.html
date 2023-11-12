@@ -1,0 +1,84 @@
+<h1 mat-dialog-title>
+
+  <div>
+    <mat-icon>router</mat-icon>
+    <span>Editar Serviços - {{data.loja.loja}}</span>
+  </div>
+
+  <button mat-icon-button (click)="_dialogRef.close()">
+      <mat-icon >close</mat-icon>
+  </button>
+
+</h1>
+
+<mat-dialog-content class="mat-typography">
+
+  <form [formGroup]="formGroup">
+    <mat-form-field appearance="outline">
+      <mat-label>Tipo de Serviço</mat-label>
+      <mat-select formControlName="tipoServico" [errorStateMatcher]="matcher" [(ngModel)]="data.servico.TIPO_SERVICO">
+        <mat-option *ngFor="let item of TiposSevicos" [value]="item">
+          {{item}}
+        </mat-option>
+      </mat-select>
+      <mat-error class="msg-error" *ngIf="formGroup.get('tipoServico')?.hasError('required')">
+        TIPO DE SERVIÇO é <strong>Obrigatório</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Operadora</mat-label>
+      <mat-select formControlName="operadora" [errorStateMatcher]="matcher" [(ngModel)]="data.servico.OPERADORA">
+        <mat-option *ngFor="let item of operadoras" [value]="item">
+          {{item}}
+        </mat-option>
+      </mat-select>
+      <mat-error class="msg-error" *ngIf="formGroup.get('operadora')?.hasError('required')">
+        OPERADORA é <strong>Obrigatório</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Designação/Linha</mat-label>
+      <input matInput formControlName="designacao" [errorStateMatcher]="matcher" [(ngModel)]="data.servico.DESIGNACAO">
+
+      <mat-error class="msg-error" *ngIf="formGroup.get('designacao')?.hasError('required')">
+        DESIGNAÇÃO é <strong>Obrigatório</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Velocidade</mat-label>
+      <input type="number" matInput formControlName="velocidade" [errorStateMatcher]="matcher" [(ngModel)]="velocidade">
+      <span style="font-weight: 600; margin-left: 15px;">MB</span>
+
+      <mat-error class="msg-error" *ngIf="formGroup.get('velocidade')?.hasError('required')">
+        VELOCIDADE é <strong>Obrigatória</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="cnpj" appearance="outline">
+      <mat-label>CNPJ/Razão Social</mat-label>
+      <mat-select formControlName="idCnpj" [errorStateMatcher]="matcher" [(ngModel)]="data.servico.ID_CNPJ">
+        <mat-option *ngFor="let item of cnpjs" [value]="item.id">
+          {{item.cnpj}}
+        </mat-option>
+      </mat-select>
+      <mat-error class="msg-error" *ngIf="formGroup.get('tipoServico')?.hasError('required')">
+        CNPJ é <strong>Obrigatório</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="observacao" appearance="outline">
+      <mat-label>Observação</mat-label>
+      <input matInput formControlName="observacao" [(ngModel)]="data.servico.OBSERVACAO">
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button color="primary" [disabled]="!formGroup.valid" (click)="editarServicoLoja()">
+    <mat-icon style="color: whitesmoke;">edit</mat-icon>
+    Editar
+  </button>
+</mat-dialog-actions>

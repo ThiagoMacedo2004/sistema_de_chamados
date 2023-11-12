@@ -1,0 +1,11 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.nome-usuario {
+  margin-right: 5px;
+}
+
+.btn-logout:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}

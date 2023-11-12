@@ -39,9 +39,9 @@ import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { MenuComponent } from './menu/menu.component';
 import { TabelaOcorrenciasComponent } from './ocorrencias/tabela-ocorrencias/tabela-ocorrencias.component';
-import { LoginComponent } from './login/login.component';
+// import { LoginComponent } from './login/LoginComponent';
 import { AuthGuard } from './guards/auth-guard';
-import { UsuariosComponent } from './usuarios/usuarios.component';
+// import { UsuariosComponent } from './usuarios/usuarios.component';
 import { FormularioUsuarioComponent } from './usuarios/formulario-usuario/formulario-usuario.component';
 import { EditarUsuarioComponent } from './usuarios/editar-usuario/editar-usuario.component';
 import { LojasComponent } from './lojas/lojas.component';
@@ -54,6 +54,8 @@ import { DetalheLojaComponent } from './lojas/detalhe-loja/detalhe-loja.componen
 import { EditarServicosComponent } from './lojas/editar-servicos/editar-servicos.component';
 import { AdicionarServicoLojaComponent } from './lojas/adicionar-servico-loja/adicionar-servico-loja.component';
 import { AdicionarMicroComponent } from './micros/adicionar-micro/adicionar-micro.component';
+import { LoginComponent } from './login/login.component';
+import { UsuariosComponent } from './usuarios/usuarios.component';
 
 
 
